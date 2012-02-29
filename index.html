@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>GC on Javascript</title>
+<link rel="stylesheet" href="css/bootstrap.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>mark and sweep GC</h1>
+        <div class="row show-grid">
+            <div class="span6">
+                <h2>input Area</h2>
+                <textarea class="span6" id="inputarea" rows="15"></textarea>
+            </div>
+            <div class="span6">
+                <h2>output Area</h2>
+                <textarea class="span6" id="outputarea" rows="15"></textarea>
+            </div>
+        </div>
+
+        <div class="well">
+            <button class="btn primary">RUN programs</button>&nbsp;
+            <button class="btn">GC mark</button>
+            <button class="btn">GC sweep</button>
+        </div>
+    </div>
+
+    <script src="gc.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+</html>
