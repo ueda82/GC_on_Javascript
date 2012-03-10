@@ -2,9 +2,9 @@ var gc = {
   HEAP_SIZE : 100,
   heap : new Array(),
   root : window.sandbox,
-  freeList:null,
+  freeList : null,
   //object set heap
-  chunk :function(obj){
+  chunk : function(obj){
     var l=this.freeList;
     if(l.length==0){
        alert('heap is nothing!'); 
@@ -14,10 +14,23 @@ var gc = {
     this.heap[i] = obj;
     return; 
   },
-  newFreeList:function(){
+  newFreeList : function(){
     this.freeList = new Array();  
     for (var i=0; i < this.HEAP_SIZE; i++) {
       this.freeList.push(i); 
+    };
+  },
+  heapLog : function(){
+    var table = document.getElementById('heapTable');
+    table.innerHTML="";
+    var h = this.heap;
+    var row; 
+    for (var i=0; i < h.length; i++) {
+      if(i%10==0){
+         row = table.insertRow(); 
+      }
+      var cell = row.insertCell();
+      cell.innerHTML = h[i].value;
     };
   }
 }

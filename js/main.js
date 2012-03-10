@@ -9,6 +9,7 @@ var sandbox = new function(){
     with(this){
       eval(code);
     }
+    gc.heapLog();
   };
   this.log =function(output){
       logs+=output + "\n";
