@@ -1,7 +1,7 @@
 var gc = {
   HEAP_SIZE : 100,
   heap : new Array(),
-  root : window.sandbox,
+  root : null,
   freeList : null,
   //object set heap
   chunk : function(obj){
@@ -32,7 +32,14 @@ var gc = {
       var cell = row.insertCell();
       cell.innerHTML = h[i].value;
     };
+  },
+  
+  mark : function(obj){
+  },
+  sweep : function(obj){
+    alert('test2');
   }
+
 }
 
 gc.newFreeList();
