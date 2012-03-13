@@ -1,28 +1,38 @@
 //run javascript Object
-var sandbox = new function(){
-  var window = null;
-  var document = null;
-  var alert = null;
-  var logs='';
-  this.do = function(code){
-    logs='';
-    with( { log :function(output){ logs+=output + "\n"; } }){
+var sandbox = {
+  do : function(code){
+    var logs='';
+    var withObj ={ 
+      log :function(output){ logs+=output + "\n"; }, 
+      window : undefined,
+      document : undefined,
+      alert : undefined,
+      sandbox : undefined,
+      gc :undefined 
+    } ;
+    with(withObj){
       eval(code);
     }
-    var ogs;
-      for(prop in this){
-        ogs+=prop+ "\n";
-      }
+    //outputlogs
+    document.getElementById("outputarea").value = logs;
     gc.heapLog();
-  };
-  this.outputLog =function(){
-     return logs; 
-  };
-}();
-
+  },
+};
+//gc rootObj regit
 (function(){
   gc.root=sandbox;
 })();
+
+//ç≈èâÇ©ÇÁÇ†ÇÈä÷êîÇ…ÇÕàÛÇÇ¬ÇØÇƒÇ®Ç≠
+// (function(){
+  // var f = function(obj){
+    // for(s in obj){
+      // s
+    // }
+  // }
+  // f(window);
+// })();
+
 //add ButtonEvent
 (function(){
   var js = document.getElementById("runJavascript");
@@ -31,12 +41,11 @@ var sandbox = new function(){
   var f  = function () {
     var code = document.getElementById("inputarea").value;
     sandbox.do(code);
-    document.getElementById("outputarea").value = sandbox.outputLog();
   };
 
   if (js.attachEvent){
     js.attachEvent('onclick', f);
-    mark.attachEvent('onclick', function(){gc.mark(gc.root);});
+    mark.attachEvent('onclick', function(){gc.mark(window);});
     sweep.attachEvent('onclick', gc.sweep);
   }else {
     js.addEventListener('click', f, false); 
