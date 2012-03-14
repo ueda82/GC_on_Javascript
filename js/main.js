@@ -17,21 +17,19 @@ var sandbox = {
     document.getElementById("outputarea").value = logs;
     gc.heapLog();
   },
+  //windowProp has window's propaty
+  windowProp:function(){
+    var obj = {};
+    for(s in window){
+      obj[s]=true;
+    }
+    return obj;
+  }()
 };
 //gc rootObj regit
 (function(){
   gc.root=sandbox;
 })();
-
-//Å‰‚©‚ç‚ ‚éŠÖ”‚É‚Íˆó‚ğ‚Â‚¯‚Ä‚¨‚­
-// (function(){
-  // var f = function(obj){
-    // for(s in obj){
-      // s
-    // }
-  // }
-  // f(window);
-// })();
 
 //add ButtonEvent
 (function(){
