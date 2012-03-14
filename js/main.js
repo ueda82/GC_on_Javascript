@@ -53,10 +53,10 @@ var sandbox = {
   if (js.attachEvent){
     js.attachEvent('onclick', f);
     mark.attachEvent('onclick', function(){gc.mark(gc.root);});
-    sweep.attachEvent('onclick', gc.sweep);
+    sweep.attachEvent('onclick', function(){gc.sweep();});
   }else {
     js.addEventListener('click', f, false); 
     mark.addEventListener('click',function(){gc.mark(gc.root);}, false); 
-    sweep.addEventListener('click', gc.sweep, false); 
+    sweep.addEventListener('click',function(){gc.sweep();}, false); 
   }
 })();

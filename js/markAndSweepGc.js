@@ -40,14 +40,29 @@ var gc = {
       if(typeof prop == 'object'){
         if(prop.isGcObject && !prop.mark){
           prop.mark = true;
+        }
+        if(!(prop.isGcObject && prop.mark)){
           this.mark(prop);
         }
       }
     }
     this.heapLog();
   },
-  sweep : function(obj){
-    alert('test2');
+  sweep : function(){
+    var i;
+    var h = this.heap;
+    var array =  new Array();
+
+    for(i=0; i<h.length; i++){
+      if(h[i].mark){
+        h[i].mark =false;
+      }else{
+        h[i].value = null;
+        array.push(i); 
+      }
+    }
+    this.freeList = array;  
+    gc.heapLog();
   }
 
 }
