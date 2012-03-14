@@ -1,7 +1,7 @@
 var gc = {
   HEAP_SIZE : 100,
   heap : new Array(),
-  root : null,
+  root : {},
   freeList : null,
   //object set heap
   chunk : function(obj){
@@ -30,11 +30,21 @@ var gc = {
          row = table.insertRow(); 
       }
       var cell = row.insertCell();
-      cell.innerHTML = h[i].value;
+      cell.innerHTML = (h[i].mark ? "*":"") + h[i].value;
     };
   },
   
   mark : function(obj){
+    for(var s in obj){
+      var prop = obj[s];
+      if(typeof prop == 'object'){
+        if(prop.isGcObject && !prop.mark){
+          prop.mark = true;
+          this.mark(prop);
+        }
+      }
+    }
+    this.heapLog();
   },
   sweep : function(obj){
     alert('test2');

@@ -2,6 +2,7 @@
 var sandbox = {
   do : function(code){
     var logs='';
+    var root = gc.root;
     var withObj ={ 
       log :function(output){ logs+=output + "\n"; }, 
       window : undefined,
@@ -11,25 +12,33 @@ var sandbox = {
       gc :undefined 
     } ;
     with(withObj){
-      eval(code);
+      // code this object is gc.root
+      (function(){
+        eval(code);
+      }).apply(root,[]);
     }
     //outputlogs
     document.getElementById("outputarea").value = logs;
+    this.windowDiff();
     gc.heapLog();
   },
   //windowProp has window's propaty
   windowProp:function(){
     var obj = {};
-    for(s in window){
+    for(var s in window){
       obj[s]=true;
     }
     return obj;
-  }()
+  }(),
+  //window diff windowProp
+  windowDiff:function(){
+    for(var s in window){
+      if(!this.windowProp[s]){
+        gc.root[s]=window[s];
+      }
+    }
+  }
 };
-//gc rootObj regit
-(function(){
-  gc.root=sandbox;
-})();
 
 //add ButtonEvent
 (function(){
@@ -43,7 +52,7 @@ var sandbox = {
 
   if (js.attachEvent){
     js.attachEvent('onclick', f);
-    mark.attachEvent('onclick', function(){gc.mark(window);});
+    mark.attachEvent('onclick', function(){gc.mark(gc.root);});
     sweep.attachEvent('onclick', gc.sweep);
   }else {
     js.addEventListener('click', f, false); 
