@@ -27,10 +27,14 @@ var gc = {
     var row; 
     for (var i=0; i < h.length; i++) {
       if(i%10==0){
-         row = table.insertRow(); 
+        row = document.createElement('div'); 
+        row.className ='list';
+        table.appendChild(row);
       }
-      var cell = row.insertCell();
-      cell.innerHTML = (h[i].mark ? "*":"") + h[i].value;
+      var cell = document.createElement('li');
+      cell.className = (h[i].mark ? 'mark':'');
+      cell.innerText =h[i].value;
+      row.appendChild(cell);
     };
   },
   

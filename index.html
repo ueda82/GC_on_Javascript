@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <title>GC on Javascript</title>
 <link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/my.css" />
 </head>
 <body>
     <div class="container">
@@ -24,8 +25,9 @@
             <button class="btn" id="runMark">GC mark</button>
             <button class="btn" id="runSweep">GC sweep</button>
         </div>
-        <table id="heapTable"  class="table table-bordered table-striped">
-        </table>
+        <h2>heap table</h2>
+        <div id ="heapTable">
+        </div>
     </div>
 
     <script src="js/markAndSweepGc.js"></script>

@@ -1,0 +1,14 @@
+.list{
+  list-style: none; overflow: hidden; margin-top: 5px; margin-left: 0px;
+}
+.list li {
+  border-radius: 4px; border: 1px solid rgb(221, 221, 221); width: 10%; height: 20px; text-align: center;
+         line-height: 20px; font-size: 12px; font-weight: bold; float: left; position: relative; -moz-border-radius: 4px; -webkit-border-radius: 4px;overflow:hidden;
+}
+.list li + li {
+  margin-left: 10px;
+}
+.list li.mark{
+  color:#468847;
+  background-color:rgb(223, 240, 216);
+}
