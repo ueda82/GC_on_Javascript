@@ -5,11 +5,11 @@ var gc = {
   freeList : null,
   //object set heap
   chunk : function(obj){
-    var l=this.freeList;
-    if(l.length==0){
+    var l = this.freeList;
+    if(l.length == 0){
        alert('heap is nothing!'); 
     }
-    var i =l[0];
+    var i = l[0];
     l.shift();
     this.heap[i] = obj;
     return; 

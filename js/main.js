@@ -1,10 +1,10 @@
 //run javascript Object
 var sandbox = {
   do : function(code){
-    var logs='';
+    var logs = '';
     var root = gc.root;
     var r = gc.root;
-    var withObj ={ 
+    var withObj = { 
       log :function(output){ logs+=output + "\n"; }, 
       window : undefined,
       document : undefined,
@@ -27,7 +27,7 @@ var sandbox = {
   windowProp:function(){
     var obj = {};
     for(var s in window){
-      obj[s]=true;
+      obj[s] = true;
     }
     return obj;
   }(),
@@ -35,7 +35,7 @@ var sandbox = {
   windowDiff:function(){
     for(var s in window){
       if(!this.windowProp[s]){
-        gc.root[s]=window[s];
+        gc.root[s] = window[s];
       }
     }
   }
@@ -45,7 +45,7 @@ var sandbox = {
 (function(){
   var js = document.getElementById("runJavascript");
   var mark = document.getElementById("runMark");
-  var sweep= document.getElementById("runSweep");
+  var sweep = document.getElementById("runSweep");
   var f  = function () {
     var code = document.getElementById("inputarea").value;
     sandbox.do(code);
