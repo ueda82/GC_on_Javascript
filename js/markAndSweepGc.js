@@ -27,18 +27,18 @@ var gc = {
     var h = this.heap;
     var row; 
     for (var i=0; i < h.length; i++) {
-      if(i%10==0){
+      if(i%10 == 0){
         row = document.createElement('div'); 
-        row.className ='list';
+        row.className = 'list';
         table.appendChild(row);
       }
       var cell = document.createElement('li');
-      if(h[i].value){
+      if(h[i]){
         cell.className = (h[i].mark ? 'mark':'');
-        cell.innerText =h[i].value;
+        cell.innerText = h[i].value;
       }else{
         cell.className = 'null';
-        cell.innerText ="*Null";
+        cell.innerText = "*Null";
       }
       row.appendChild(cell);
     };
@@ -59,15 +59,19 @@ var gc = {
     this.heapLog();
   },
   sweep : function(){
-    var i;
     var h = this.heap;
-    var array =  new Array();
+    var array = new Array();
 
-    for(i=0; i<h.length; i++){
+    for(var i=0; i<this.HEAP_SIZE; i++){
+      if(!h[i]){
+        array.push(i); 
+        continue;
+      }
       if(h[i].mark){
-        h[i].mark =false;
+        h[i].mark = false;
       }else{
-        h[i].value = null;
+        // h[i].value = null;
+        h[i] = null;
         array.push(i); 
       }
     }

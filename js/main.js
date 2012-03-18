@@ -3,6 +3,7 @@ var sandbox = {
   do : function(code){
     var logs='';
     var root = gc.root;
+    var r = gc.root;
     var withObj ={ 
       log :function(output){ logs+=output + "\n"; }, 
       window : undefined,

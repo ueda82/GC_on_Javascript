@@ -2,11 +2,11 @@
   list-style: none; overflow: hidden; margin-top: 5px; margin-left: 0px;
 }
 .list li {
-  border-radius: 4px;  width: 10%; height: 20px; text-align: center;
+  border-radius: 4px;  width: 9%; height: 20px; text-align: center;
          line-height: 20px; font-size: 12px; font-weight: bold; float: left; position: relative; -moz-border-radius: 4px; -webkit-border-radius: 4px;overflow:hidden;border: 1px solid ;
 }
 .list li + li {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .list li.mark{
   color:#468847;
