@@ -5,6 +5,9 @@
   border-radius: 4px;  width: 9%; height: 20px; text-align: center;
          line-height: 20px; font-size: 12px; font-weight: bold; float: left; position: relative; -moz-border-radius: 4px; -webkit-border-radius: 4px;overflow:hidden;border: 1px solid ;
 }
+.root li {
+  width: 19%; 
+}
 .list li + li {
   margin-left: 5px;
 }

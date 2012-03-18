@@ -25,22 +25,47 @@ var gc = {
     var table = document.getElementById('heapTable');
     table.innerHTML="";
     var h = this.heap;
-    var row; 
+    var row,cell; 
     for (var i=0; i < h.length; i++) {
+      //create new row
       if(i%10 == 0){
         row = document.createElement('div'); 
         row.className = 'list';
         table.appendChild(row);
       }
-      var cell = document.createElement('li');
+      //create new cell 
+      cell = document.createElement('li');
       if(h[i]){
-        cell.className = (h[i].mark ? 'mark':'');
+        cell.className = (h[i].mark ? 'mark' : '');
         cell.innerText = h[i].value;
       }else{
         cell.className = 'null';
         cell.innerText = "*Null";
       }
+
       row.appendChild(cell);
+    };
+  },
+  rootLog : function(){
+    var table = document.getElementById('rootTable');
+    table.innerHTML="";
+    var r = this.root;
+    var row,cell; 
+    var i = 0;
+    for (name in r) {
+      //create new row
+      if(i% 5 == 0){
+        row = document.createElement('div'); 
+        row.className = 'list root';
+        table.appendChild(row);
+      }
+      //create new cell 
+      cell = document.createElement('li');
+      cell.className = (r[name].isGcObject ? 'mark' : '');
+      var s = typeof r[name] == "object" ? r[name].value : r[name];
+      cell.innerText = name +' = '+ s;
+      row.appendChild(cell);
+      i++;
     };
   },
   
@@ -57,6 +82,7 @@ var gc = {
       }
     }
     this.heapLog();
+    this.rootLog();
   },
   sweep : function(){
     var h = this.heap;
@@ -76,7 +102,8 @@ var gc = {
       }
     }
     this.freeList = array;  
-    gc.heapLog();
+    this.heapLog();
+    this.rootLog();
   }
 
 }

@@ -34,3 +34,7 @@ OK・一旦オブジェクトを見るのをテーブルにしたが、最終的
 OK・CSSを作成する
 OK・markフェイズの時にmarkされたCSSは色を変える
 OK・sweepフェイズの時にmarkされたCSSは色は戻る
+OK・rootの状況が判るテーブルを作成する(rootTable)
+OK・rootTableの中にいるGC対象のオブジェクトには色をつける
+OK・テキストにサンプルプログラムを表示する
+
