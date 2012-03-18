@@ -53,14 +53,14 @@ var sandbox = {
     sandbox.do(code);
   };
   var f2 = function () {
-    var ex = "//グローバル変数, this,r,rootに入れた変数はrootの管理下に置かれます。\n"
+    document.getElementById("inputarea").value = 
+      "//グローバル変数, this,r,rootに入れた変数はrootの管理下に置かれます。\n"
       + "//new O(objct);  OクラスのインスタンスはGCの対象となります\n"
       + "//log(value)　を使うと//outputAreaにログを出力します\n \n"
       + "hello = new O('hello gc on js'); "
       + "\nlog(hello.value); \n\ni=1; \nvar local = new O([1,2,3]);"
       + " \nlog(local.value);\nfor (var i =0;i<=local.value.length;i++){\n "
       + " if(i==2){\n    loop = new O(i);\n  }\n}\n";
-    document.getElementById("inputarea").value = ex;
   };
 
   if (js.attachEvent){
@@ -71,7 +71,7 @@ var sandbox = {
     sweep.attachEvent('onclick', function(){gc.sweep();});
   }else {
     js.addEventListener('click', f, false); 
-    example.addEventListener('onclick', f2, false);
+    example.addEventListener('click', f2, false);
     mark.addEventListener('click',function(){gc.mark(gc.root);}, false); 
     sweep.addEventListener('click',function(){gc.sweep();}, false); 
   }
