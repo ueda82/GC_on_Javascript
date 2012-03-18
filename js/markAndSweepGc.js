@@ -20,6 +20,7 @@ var gc = {
       this.freeList.push(i); 
     };
   },
+  //output heap
   heapLog : function(){
     var table = document.getElementById('heapTable');
     table.innerHTML="";
@@ -32,8 +33,13 @@ var gc = {
         table.appendChild(row);
       }
       var cell = document.createElement('li');
-      cell.className = (h[i].mark ? 'mark':'');
-      cell.innerText =h[i].value;
+      if(h[i].value){
+        cell.className = (h[i].mark ? 'mark':'');
+        cell.innerText =h[i].value;
+      }else{
+        cell.className = 'null';
+        cell.innerText ="*Null";
+      }
       row.appendChild(cell);
     };
   },
