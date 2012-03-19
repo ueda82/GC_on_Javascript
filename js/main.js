@@ -1,6 +1,6 @@
 //run javascript Object
 var sandbox = {
-  do : function(code){
+  run : function(code){
     var logs = '';
     var root = gc.root;
     var r = gc.root;
@@ -15,7 +15,11 @@ var sandbox = {
     with(withObj){
       // code this object is gc.root
       (function(){
-        eval(code);
+        try{
+          eval(code);
+        }catch(e){
+          log(e.message);
+        }
       }).apply(root,[]);
     }
     //outputlogs
@@ -50,17 +54,17 @@ var sandbox = {
   var sweep = document.getElementById("runSweep");
   var f = function () {
     var code = document.getElementById("inputarea").value;
-    sandbox.do(code);
+    sandbox.run(code);
   };
   var f2 = function () {
     document.getElementById("inputarea").value = 
       "//グローバル変数, this,r,rootに入れた変数はrootの管理下に置かれます。\n"
       + "//new O(objct);  OクラスのインスタンスはGCの対象となります\n"
       + "//log(value)　を使うと//outputAreaにログを出力します\n \n"
-      + "hello = new O('hello gc on js'); "
-      + "\nlog(hello.value); \n\ni=1; \nvar local = new O([1,2,3]);"
+      + "r.hello = new O('hello gc on js'); "
+      + "\nlog(r.hello.value); \n\ni=1; \nvar local = new O([1,2,3]);"
       + " \nlog(local.value);\nfor (var i =0;i<=local.value.length;i++){\n "
-      + " if(i==2){\n    loop = new O(i);\n  }\n}\n";
+      + " if(i==2){\n    r.loop = new O(i);\n  }\n}\n";
   };
 
   if (js.attachEvent){

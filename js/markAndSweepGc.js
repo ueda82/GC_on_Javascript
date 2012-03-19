@@ -73,10 +73,11 @@ var gc = {
     for(var s in obj){
       var prop = obj[s];
       if(typeof prop == 'object'){
+        var visitAleady = prop.isGcObject && prop.mark;
         if(prop.isGcObject && !prop.mark){
           prop.mark = true;
         }
-        if(!(prop.isGcObject && prop.mark)){
+        if(!visitAleady){
           this.mark(prop);
         }
       }
