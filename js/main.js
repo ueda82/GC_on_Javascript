@@ -29,13 +29,7 @@ var sandbox = {
     gc.rootLog();
   },
   //windowProp has window's propaty
-  windowProp:function(){
-    var obj = {};
-    for(var s in window){
-      obj[s] = true;
-    }
-    return obj;
-  }(),
+  windowProp: null, 
   //window diff windowProp
   windowDiff:function(){
     for(var s in window){
@@ -45,6 +39,13 @@ var sandbox = {
     }
   }
 };
+(function(){
+    var obj = {};
+    for(var s in window){
+      obj[s] = true;
+    }
+    return obj;
+})();
 
 //add ButtonEvent
 (function(){
