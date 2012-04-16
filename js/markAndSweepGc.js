@@ -122,11 +122,10 @@ var gc = {
     //after copyAdress List clear 
     var array = new Array();
     for(var i=copyAdress; i<this.HEAP_SIZE; i++){
-      if(!h[i]){
-        continue;
-      }
-      h[i] = null;
       array.push(i); 
+      if(h[i]){
+        h[i] = null;
+      }
     }
     this.freeList = array;  
     this.heapLog();
