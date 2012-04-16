@@ -52,6 +52,7 @@ var sandbox = {
   var js = document.getElementById("runJavascript");
   var mark = document.getElementById("runMark");
   var sweep = document.getElementById("runSweep");
+  var compaction= document.getElementById("runCompaction");
   var f = function () {
     var code = document.getElementById("inputarea").value;
     sandbox.run(code);
@@ -71,12 +72,13 @@ var sandbox = {
     js.attachEvent('onclick', f);
     example.attachEvent('onclick', f2);
     mark.attachEvent('onclick', function(){gc.mark(gc.root);});
-    mark.attachEvent('onclick', function(){gc.mark(gc.root);});
     sweep.attachEvent('onclick', function(){gc.sweep();});
+    compaction.attachEvent('onclick', function(){gc.compaction();});
   }else {
     js.addEventListener('click', f, false); 
     example.addEventListener('click', f2, false);
     mark.addEventListener('click',function(){gc.mark(gc.root);}, false); 
     sweep.addEventListener('click',function(){gc.sweep();}, false); 
+    compaction.addEventListener('click',function(){gc.compaction();}, false); 
   }
 })();

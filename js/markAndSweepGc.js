@@ -105,6 +105,32 @@ var gc = {
     this.freeList = array;  
     this.heapLog();
     this.rootLog();
+  },
+  compaction : function(){
+    var h = this.heap;
+    var copyAdress = 0;
+    for(var i=0; i<this.HEAP_SIZE; i++){
+      if(!h[i]){
+        continue;
+      }
+      if(h[i].mark){
+        h[i].mark = false;
+        h[copyAdress] =h[i]; 
+        copyAdress = copyAdress + 1;
+      }
+    }
+    //after copyAdress List clear 
+    var array = new Array();
+    for(var i=copyAdress; i<this.HEAP_SIZE; i++){
+      if(!h[i]){
+        continue;
+      }
+      h[i] = null;
+      array.push(i); 
+    }
+    this.freeList = array;  
+    this.heapLog();
+    this.rootLog();
   }
 
 }
