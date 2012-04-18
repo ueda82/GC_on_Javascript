@@ -60,9 +60,12 @@ var gc = {
         table.appendChild(row);
       }
       //create new cell 
+      var obj = r[name];
       cell = document.createElement('li');
-      cell.className = (r[name].isGcObject ? 'mark' : '');
-      var s = typeof r[name] == "object" ? r[name].value : r[name];
+      cell.className = (obj.isGcObject ? 'mark' : '');
+      var s = obj instanceof Array? 'Array[' + obj.length + ']'
+        : typeof obj == "object" & "value" in obj ? obj.value 
+        : obj;
       cell.innerText = name +' = '+ s;
       row.appendChild(cell);
       i++;
