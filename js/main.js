@@ -57,26 +57,67 @@ var sandbox = {
     var code = document.getElementById("inputarea").value;
     sandbox.run(code);
   };
-  var f2 = function () {
+  var ex1 = function () {
     document.getElementById("inputarea").value = 
-      "//グローバル変数, r,rootに入れた変数はrootの管理下に置かれます。\n"
-      + "//new O(objct);  OクラスのインスタンスはGCの対象となります\n"
-      + "//log(value)  を使うと//outputAreaにログを出力します\n \n"
-      + "r.hello = new O('hello gc on js'); "
-      + "\nlog(r.hello.value); \n\ni=1; \nvar local = new O([1,2,3]);"
-      + " \nlog(local.value);\nfor (var i =0;i<=local.value.length;i++){\n "
-      + " if(i==2){\n    r.loop = new O(i);\n  }\n}\n";
+    '//サンプル１\n'
+    + '//run Programsボタンをプログラムを実行\n'
+    + '//GC markボタンを押してマークを確認\n'
+    + '//GC sweepボタンを押して不要な部分が消えるのを確認\n'
+    + '\n'
+    + '//Oというオブジェクトを生成するとGCの管理下に入ります。\n'
+    + 'new O("HelloWorld");\n'
+    + 'new O(1);\n'
+    + 'new O([1,2,3]);\n'
+    + '\n'
+    + '//グローバル変数、root、r のプロパティはroot として扱います。\n'
+    + 'g= new O("ぐろーばる変数");\n'
+    + '//log関数を使うとOutputAreaに引数の値が表示されます。\n'
+    + '//O.valueで値を取得できます\n'
+    + 'log(g.value);\n'
+    + 'g.value = "グローバル変数を書き換えるよ";\n'
+    + 'log(g.value);\n'
+    + '\n'
+    + 'var l= new O("ローカル変数");\n'
+    + 'log(l.value);\n';
   };
 
+  var ex2 = function () {
+    document.getElementById("inputarea").value = 
+    + '//for文の中でOを生成して\n'
+    + '//3の倍数だけloop変数に入れる\n'
+    + 'loop =[];\n'
+    + 'for(var i =0;i<30;i++){\n'
+    + '    var obj = new O(i);\n'
+    + '    if(i%3){\n'
+    + '        loop[i] = obj;\n'
+    + '    }\n'
+    + '}\n'
+  };
+  var ex3 = function () {
+    document.getElementById("inputarea").value = 
+    + '//for文の中でObjを生成して\n'
+    + '//3の倍数だけloop変数に入れる\n'
+    + 'loop =[];\n'
+    + 'for (var i =0;i<30;i++){\n'
+    + '    var test = new O(i);\n'
+    + '    if(i%3){\n'
+    + '        loop[i] =test ;\n'
+    + '    }\n'
+    + '}\n'
+  };
   if (js.attachEvent){
     js.attachEvent('onclick', f);
-    example.attachEvent('onclick', f2);
+    example.attachEvent('onclick', ex1);
+    example2.attachEvent('onclick', ex2);
+    example3.attachEvent('onclick', ex3);
     mark.attachEvent('onclick', function(){gc.mark(gc.root);});
     sweep.attachEvent('onclick', function(){gc.sweep();});
     compaction.attachEvent('onclick', function(){gc.compaction();});
   }else {
     js.addEventListener('click', f, false); 
-    example.addEventListener('click', f2, false);
+    example.addEventListener('click', ex1, false);
+    example2.addEventListener('click', ex2, false);
+    example3.addEventListener('click', ex3, false);
     mark.addEventListener('click',function(){gc.mark(gc.root);}, false); 
     sweep.addEventListener('click',function(){gc.sweep();}, false); 
     compaction.addEventListener('click',function(){gc.compaction();}, false); 
