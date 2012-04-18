@@ -59,9 +59,9 @@ var sandbox = {
   };
   var f2 = function () {
     document.getElementById("inputarea").value = 
-      "//グローバル変数, this,r,rootに入れた変数はrootの管理下に置かれます。\n"
+      "//グローバル変数, r,rootに入れた変数はrootの管理下に置かれます。\n"
       + "//new O(objct);  OクラスのインスタンスはGCの対象となります\n"
-      + "//log(value)　を使うと//outputAreaにログを出力します\n \n"
+      + "//log(value)  を使うと//outputAreaにログを出力します\n \n"
       + "r.hello = new O('hello gc on js'); "
       + "\nlog(r.hello.value); \n\ni=1; \nvar local = new O([1,2,3]);"
       + " \nlog(local.value);\nfor (var i =0;i<=local.value.length;i++){\n "
