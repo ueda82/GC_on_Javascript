@@ -59,42 +59,46 @@ var sandbox = {
   };
   var ex1 = function () {
     document.getElementById("inputarea").value = 
-    '//サンプル１\n'
-    + '//run Programsボタンをプログラムを実行\n'
-    + '//GC markボタンを押してマークを確認\n'
-    + '//GC sweepボタンを押して不要な部分が消えるのを確認\n'
-    + '\n'
+      '//サンプル１\n'
     + '//Oというオブジェクトを生成するとGCの管理下に入ります。\n'
     + 'new O("HelloWorld");\n'
     + 'new O(1);\n'
     + 'new O([1,2,3]);\n'
-    + '\n'
-    + '//グローバル変数、root、r のプロパティはroot として扱います。\n'
-    + 'g= new O("ぐろーばる変数");\n'
     + '//log関数を使うとOutputAreaに引数の値が表示されます。\n'
     + '//O.valueで値を取得できます\n'
+    + 'var hello = new O("HelloWorld");\n'
+    + 'log(hello.value);\n'
+    + '//OのなかにOを入れてもOK\n'
+    + 'var obj= new O(hello);\n'
+    + '\n'
+    + '//run Programsボタンをプログラムを実行\n'
+    + '//GC markボタンを押してマークされないことを確認\n'
+    + '//GC sweepボタンを押してheapがすべて消えることを確認\n';
+  };
+
+  var ex2 = function () {
+    document.getElementById("inputarea").value = 
+      '//サンプル２\n'
+    + '//グローバル変数、root、r のプロパティはroot として扱います。\n'
+    + 'g= new O("ぐろーばる変数");\n'
     + 'log(g.value);\n'
     + 'g.value = "グローバル変数を書き換えるよ";\n'
     + 'log(g.value);\n'
     + '\n'
     + 'var l= new O("ローカル変数");\n'
-    + 'log(l.value);\n';
-  };
-
-  var ex2 = function () {
-    document.getElementById("inputarea").value = 
-    + '//for文の中でOを生成して\n'
-    + '//3の倍数だけloop変数に入れる\n'
-    + 'loop =[];\n'
-    + 'for(var i =0;i<30;i++){\n'
-    + '    var obj = new O(i);\n'
-    + '    if(i%3){\n'
-    + '        loop[i] = obj;\n'
-    + '    }\n'
-    + '}\n'
+    + 'log(l.value);\n'
+    + '\n'
+    + 'var l2= new O("間接参照先");\n'
+    + 'g2= new O(l2);\n'
+    + 'log(l.value);\n'
+    + '\n'
+    + '//run Programsボタンをプログラムを実行\n'
+    + '//GC markボタンを押してマークを確認\n'
+    + '//GC sweepボタンを押してグローバル変数が残ることを確認\n';
   };
   var ex3 = function () {
     document.getElementById("inputarea").value = 
+    '//サンプル３\n'
     + '//for文の中でObjを生成して\n'
     + '//3の倍数だけloop変数に入れる\n'
     + 'loop =[];\n'
@@ -103,7 +107,7 @@ var sandbox = {
     + '    if(i%3){\n'
     + '        loop[i] =test ;\n'
     + '    }\n'
-    + '}\n'
+    + '}\n';
   };
   if (js.attachEvent){
     js.attachEvent('onclick', f);
