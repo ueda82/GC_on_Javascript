@@ -64,7 +64,7 @@ var gc = {
       cell = document.createElement('li');
       cell.className = (obj.isGcObject ? 'mark' : '');
       var s = obj instanceof Array? 'Array[' + obj.length + ']'
-        : typeof obj == "object" & "value" in obj ? obj.value 
+        : typeof obj == "object" && "value" in obj ? obj.value 
         : obj;
       cell.innerText = name +' = '+ s;
       row.appendChild(cell);
